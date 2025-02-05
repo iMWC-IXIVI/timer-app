@@ -7,7 +7,7 @@ from tkinter import Tk, ttk
 
 root = Tk()
 root.attributes('-topmost', True)
-root.geometry('400x60')
+root.geometry('500x60')
 root.resizable(width=False, height=False)
 root.overrideredirect(True)
 
@@ -33,9 +33,6 @@ label.grid(column=0, row=0)
 timer = 0
 
 is_running = True
-
-
-
 
 
 def thread_func(thread_timer):
@@ -74,8 +71,10 @@ def stop_timer():
 
 button_start = ttk.Button(frm, text='Start', command=start_timer)
 button_stop = ttk.Button(frm, text='Stop', command=stop_timer)
+button_exit = ttk.Button(frm, text='Exit', command=root.destroy)
 
 button_start.grid(column=0, row=1)
 button_stop.grid(column=1, row=1)
+button_exit.grid(column=2, row=1)
 
 root.mainloop()
