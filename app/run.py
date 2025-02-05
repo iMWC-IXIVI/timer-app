@@ -34,23 +34,31 @@ def thread_func(thread_timer):
 
 
 def start_timer():
-    global timer, is_running
+    global timer, is_running, button_start
 
     is_running = True
 
     thread = Thread(target=thread_func, args=(timer, ))
+
+    button_start.grid_remove()
+
     thread.start()
 
 
 def stop_timer():
-    global is_running
+    global is_running, button_start
 
     label.config(text='Нажмите на кнопку "Start" для начала секундомера')
+
+    button_start.grid()
 
     is_running = False
 
 
-ttk.Button(frm, text='Start', command=start_timer).grid(column=0, row=1)
-ttk.Button(frm, text='Stop', command=stop_timer).grid(column=1, row=1)
+button_start = ttk.Button(frm, text='Start', command=start_timer)
+button_stop = ttk.Button(frm, text='Stop', command=stop_timer)
+
+button_start.grid(column=0, row=1)
+button_stop.grid(column=1, row=1)
 
 root.mainloop()
