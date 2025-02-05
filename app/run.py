@@ -6,6 +6,7 @@ from tkinter import Tk, ttk
 
 
 root = Tk()
+root.attributes('-topmost', True)
 
 frm = ttk.Frame(root, padding=10)
 frm.grid()
