@@ -7,6 +7,8 @@ from tkinter import Tk, ttk
 
 root = Tk()
 root.attributes('-topmost', True)
+root.geometry('400x60')
+root.resizable(width=False, height=False)
 
 frm = ttk.Frame(root, padding=10)
 frm.grid()
