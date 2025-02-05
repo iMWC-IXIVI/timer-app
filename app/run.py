@@ -9,9 +9,23 @@ root = Tk()
 root.attributes('-topmost', True)
 root.geometry('400x60')
 root.resizable(width=False, height=False)
+root.overrideredirect(True)
+
+
+def move_window(event):
+    root.geometry(f'+{event.x_root}+{event.y_root}')
+
+
+def start_move(event):
+    root.x = event.x
+    root.y = event.y
+
 
 frm = ttk.Frame(root, padding=10)
 frm.grid()
+
+frm.bind('<Button-1>', start_move)
+frm.bind('<B1-Motion>', move_window)
 
 label = ttk.Label(frm, text='Нажмите на кнопку "Start" для начала секундомера')
 label.grid(column=0, row=0)
@@ -19,6 +33,9 @@ label.grid(column=0, row=0)
 timer = 0
 
 is_running = True
+
+
+
 
 
 def thread_func(thread_timer):
