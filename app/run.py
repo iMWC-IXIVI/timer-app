@@ -39,6 +39,8 @@ is_running = True
 def thread_func():
     global timer, hours
 
+    label.place(x=30, y=0)
+
     while is_running:
 
         if not is_running:
@@ -63,7 +65,7 @@ def start_timer():
     thread = Thread(target=thread_func)
 
     button_start.place_forget()
-    button_stop.place(x=0, y=25)
+    button_stop.place(x=-10, y=25)
 
     thread.start()
 
@@ -74,8 +76,9 @@ def stop_timer():
     is_running = False
 
     label.config(text='Секундомер')
+    label.place(x=0, y=0)
 
-    button_start.place(x=0, y=25)
+    button_start.place(x=-10, y=25)
     button_stop.place_forget()
 
     timer = 0
@@ -86,7 +89,7 @@ button_start = ttk.Button(frm, text='▶', command=start_timer, width=5)
 button_stop = ttk.Button(frm, text='■', command=stop_timer, width=5)
 button_exit = ttk.Button(frm, text='Exit', command=root.destroy, width=5)
 
-button_start.place(x=0, y=25)
+button_start.place(x=-10, y=25)
 button_exit.place(x=50, y=25)
 
 root.mainloop()
