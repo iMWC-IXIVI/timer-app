@@ -7,7 +7,7 @@ from tkinter import Tk, ttk
 
 root = Tk()
 root.attributes('-topmost', True)
-root.geometry('500x60')
+root.geometry('100x60')
 root.resizable(width=False, height=False)
 root.overrideredirect(True)
 
@@ -27,7 +27,7 @@ frm.pack(fill='both', expand=True)
 frm.bind('<Button-1>', start_move)
 frm.bind('<B1-Motion>', move_window)
 
-label = ttk.Label(frm, text='Нажмите на кнопку "Start" для начала секундомера')
+label = ttk.Label(frm, text='Секундомер')
 label.place(x=0, y=0)
 
 timer = 0
@@ -63,7 +63,7 @@ def start_timer():
     thread = Thread(target=thread_func)
 
     button_start.place_forget()
-    button_stop.place(x=400, y=25)
+    button_stop.place(x=0, y=25)
 
     thread.start()
 
@@ -73,9 +73,9 @@ def stop_timer():
 
     is_running = False
 
-    label.config(text='Нажмите на кнопку "Start" для начала секундомера')
+    label.config(text='Секундомер')
 
-    button_start.place(x=400, y=25)
+    button_start.place(x=0, y=25)
     button_stop.place_forget()
 
     timer = 0
@@ -83,10 +83,10 @@ def stop_timer():
 
 
 button_start = ttk.Button(frm, text='▶', command=start_timer, width=5)
-button_stop = ttk.Button(frm, text='⏹', command=stop_timer, width=5)
+button_stop = ttk.Button(frm, text='■', command=stop_timer, width=5)
 button_exit = ttk.Button(frm, text='Exit', command=root.destroy, width=5)
 
-button_start.place(x=400, y=25)
-button_exit.place(x=450, y=25)
+button_start.place(x=0, y=25)
+button_exit.place(x=50, y=25)
 
 root.mainloop()
