@@ -1,6 +1,6 @@
 from threading import Thread
 
-from tkinter import Tk, ttk, Frame
+from tkinter import Tk, Frame, Label, Button
 
 from time import sleep
 from datetime import datetime, timedelta
@@ -8,6 +8,8 @@ from datetime import datetime, timedelta
 
 root = Tk()
 root.attributes('-topmost', True)
+root.configure(bg='white')
+root.attributes('-transparentcolor', 'white')
 root.geometry('100x50')
 root.resizable(width=False, height=False)
 root.overrideredirect(True)
@@ -22,14 +24,14 @@ def start_move(event):
     root.y = event.y
 
 
-# frm = ttk.Frame(root, padding=10)
-frm = Frame(root)
+frm = Frame(root, bg='white')
 frm.pack(fill='both', expand=True)
 
 frm.bind('<Button-1>', start_move)
 frm.bind('<B1-Motion>', move_window)
 
-label = ttk.Label(frm, text='Секундомер')
+label = Label(frm, text='Секундомер', bg='white', fg='yellow', font=('', 10))
+
 label.place(x=10, y=0)
 
 timer = datetime.strptime('00:00:00', '%H:%M:%S')
@@ -80,11 +82,11 @@ def stop_timer():
     timer = datetime.strptime('00:00:00', '%H:%M:%S')
 
 
-button_start = ttk.Button(frm, text='▶', command=start_timer, width=5)
-button_stop = ttk.Button(frm, text='■', command=stop_timer, width=5)
-button_exit = ttk.Button(frm, text='Exit', command=root.destroy, width=5)
+button_start = Button(frm, text='▶', command=start_timer, width=3, bg='white', fg='yellow')
+button_stop = Button(frm, text='■', command=stop_timer, width=3, bg='white', fg='yellow')
+button_exit = Button(frm, text='Exit', command=root.destroy, width=3, bg='white', fg='yellow')
 
 button_start.place(x=0, y=25)
-button_exit.place(x=60, y=25)
+button_exit.place(x=68, y=25)
 
 root.mainloop()
