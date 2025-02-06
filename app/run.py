@@ -31,21 +31,26 @@ label = ttk.Label(frm, text='Нажмите на кнопку "Start" для н�
 label.place(x=0, y=0)
 
 timer = 0
+hours = 0
 
 is_running = True
 
 
 def thread_func():
-    global timer
+    global timer, hours
 
     while is_running:
 
-        timer += 1
-
-        label.config(text=str(timer))
-
         if not is_running:
             break
+
+        timer += 1
+
+        if timer == 60:
+            hours += timer // 60
+            timer = 0
+
+        label.config(text=f'{hours}:{str(timer)}')
 
         sleep(1)
 
@@ -64,7 +69,9 @@ def start_timer():
 
 
 def stop_timer():
-    global is_running, button_start, button_stop, timer
+    global is_running, button_start, button_stop, timer, hours
+
+    is_running = False
 
     label.config(text='Нажмите на кнопку "Start" для начала секундомера')
 
@@ -72,11 +79,11 @@ def stop_timer():
     button_stop.place_forget()
 
     timer = 0
-    is_running = False
+    hours = 0
 
 
-button_start = ttk.Button(frm, text='Start', command=start_timer, width=5)
-button_stop = ttk.Button(frm, text='Stop', command=stop_timer, width=5)
+button_start = ttk.Button(frm, text='▶', command=start_timer, width=5)
+button_stop = ttk.Button(frm, text='⏹', command=stop_timer, width=5)
 button_exit = ttk.Button(frm, text='Exit', command=root.destroy, width=5)
 
 button_start.place(x=400, y=25)
