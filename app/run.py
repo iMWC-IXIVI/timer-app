@@ -1,8 +1,9 @@
 from threading import Thread
 
-from time import sleep
-
 from tkinter import Tk, ttk
+
+from time import sleep
+from datetime import datetime, timedelta
 
 
 root = Tk()
@@ -30,29 +31,23 @@ frm.bind('<B1-Motion>', move_window)
 label = ttk.Label(frm, text='Секундомер')
 label.place(x=0, y=0)
 
-timer = 0
-hours = 0
-
+timer = datetime.strptime('00:00:00', '%H:%M:%S')
 is_running = True
 
 
 def thread_func():
-    global timer, hours
+    global timer
 
-    label.place(x=30, y=0)
+    label.place(x=18, y=0)
 
     while is_running:
 
         if not is_running:
             break
 
-        timer += 1
+        timer += timedelta(seconds=1)
 
-        if timer == 60:
-            hours += timer // 60
-            timer = 0
-
-        label.config(text=f'{hours}:{str(timer)}')
+        label.config(text=f'{timer.time()}')
 
         sleep(1)
 
@@ -71,18 +66,17 @@ def start_timer():
 
 
 def stop_timer():
-    global is_running, button_start, button_stop, timer, hours
+    global is_running, button_start, button_stop, timer
 
     is_running = False
 
-    label.config(text='Секундомер')
-    label.place(x=0, y=0)
+    label.config(text=f'{timer.time()}')
+    label.place(x=18, y=0)
 
     button_start.place(x=-10, y=25)
     button_stop.place_forget()
 
-    timer = 0
-    hours = 0
+    timer = datetime.strptime('00:00:00', '%H:%M:%S')
 
 
 button_start = ttk.Button(frm, text='▶', command=start_timer, width=5)
