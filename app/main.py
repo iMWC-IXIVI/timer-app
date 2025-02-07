@@ -69,6 +69,7 @@ class TimerApp(Tk):
         if self.is_running:
             self.timer += timedelta(seconds=1)
             self.label.config(text=f'{self.timer.time()}')
+            self.label.place(x=27, y=0)
             self.after(1000, self.__timer_update)
 
     def stop_timer(self):
