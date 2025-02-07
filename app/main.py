@@ -63,23 +63,14 @@ class TimerApp(Tk):
     def start_timer(self):
         self.is_running = True
 
-        thread = Thread(target=self.__thread_timer)
-
         self.button_start.place_forget()
         self.button_stop.place(x=0, y=25)
 
-        thread.start()
-
-    def __thread_timer(self):
-        self.label.place(x=27, y=0)
-
-        while self.is_running:
-            if not self.is_running:
-                break
-
+    def __timer_update(self):
+        if self.is_running:
             self.timer += timedelta(seconds=1)
             self.label.config(text=f'{self.timer.time()}')
-            sleep(1)
+            self.after(1000, self.__timer_update)
 
     def stop_timer(self):
         self.is_running = False
