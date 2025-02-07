@@ -1,9 +1,6 @@
-from threading import Thread
-
 from tkinter import Tk, Label, Button, Frame
 
 from datetime import datetime, timedelta
-from time import sleep
 
 
 class TimerApp(Tk):
@@ -65,6 +62,8 @@ class TimerApp(Tk):
 
         self.button_start.place_forget()
         self.button_stop.place(x=0, y=25)
+
+        self.__timer_update()
 
     def __timer_update(self):
         if self.is_running:
